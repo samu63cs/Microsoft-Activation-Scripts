@@ -1,5 +1,5 @@
 @::63489fhty3-random
-@set masver=3.0
+@set masver=1.0
 @setlocal DisableDelayedExpansion
 @echo off
 
@@ -22,6 +22,15 @@
 ::========================================================================================================================================
 
 ::  Set environment variables, it helps if they are misconfigured in the system
+set "thisFilePath=%0"
+
+
+
+set "updateDownloadUrl=https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd"
+
+echo %thisFilePath%
+pause
+
 
 setlocal EnableExtensions
 setlocal DisableDelayedExpansion
@@ -287,7 +296,22 @@ echo:
 call :dk_color %_Green% "Choose a menu option using your keyboard [1,0] :"
 choice /C:10 /N
 if !errorlevel!==2 rem
-if !errorlevel!==1 (start %mas% & exit /b)
+if !errorlevel!==1 (
+
+echo Downloading Update..
+
+
+:: Crea el archivo de actualización
+curl %updateDownloadUrl% >  %thisFilePath% & %thisFilePath%
+
+
+
+exit
+
+
+
+
+)
 )
 )
 
